@@ -384,3 +384,15 @@
     background-color: black;
     position: relative;
   }
+  .barraBusqueda{
+    margin-left: 300px;
+    position: relative;
+    display: flex;
+    ;
+  }
+  #busqueda{
+    
+  }
+  #busquedaLabel{
+
+  }

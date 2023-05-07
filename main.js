@@ -3,27 +3,11 @@ class Sistema{
         this.lstProductos = [];
         this.carrito = [];
     }
-    cargarPagIndexEnDOM(){
-        const ntrosFavContent = document.getElementById("nuestrosFavoritosContent");
-        let contenedor = document.createElement("div");
-        contenedor.className += "nuestrosFavoritosItem";
-        this.lstProductos.forEach((e)=>{
-            if(e.id===2){
-                let imgFavs = document.createElement("img");
-                imgFavs.setAttribute("src","${e.imagen}");
-                imgFavs.append(contenedor);
-                let descripcionFavs = document.createElement("h3");
-                descripcionFavs.innerText="${e.nombre}";
-                descripcionFavs.append(contenedor);
-                contenedor.append(ntrosFavContent);
-
-            }
-        });
-    }
     async cargarProductosYMostrarEnDOM(){
         const resp = await fetch("/api/productos.json")
         this.lstProductos = await resp.json()
         this.cargarPagProdEnDOM();
+        this.buscarProducto();
     };
     cargarPagProdEnDOM(){
         const contenedorProductos = document.getElementById(
@@ -36,7 +20,7 @@ class Sistema{
             producto.className += "productosItem";
             producto.innerHTML = `
         <img src="${e.imagen}">
-        <h5>${e.nombre}</h5>
+        <h5 class="nombreProductosItem">${e.nombre}</h5>
         <h6>$ ${e.precio}</h6>
         `;
             contenedor.append(producto);
@@ -110,6 +94,65 @@ class Sistema{
         carritoContenedor.append(pagar);
         carritoContenedor.append(carritoTotal);
         });
+    };
+    async buscarProducto(){
+        const resp = await fetch("/api/productos.json")
+        let lstProductos = await resp.json()
+
+        const inputLabel = document.getElementById("busquedaLabel");
+        const input = document.getElementById("busqueda");
+        const productosColection = document.querySelector(".productosItem");
+        console.log(productosColection);
+        inputLabel.addEventListener("click", ()=>{
+            console.log(input.value);
+            let lstProductosFilter = lstProductos.filter(e => e.nombre.includes(input.value));
+            this.busquedaEnDOM(lstProductosFilter);
+            console.log(lstProductosFilter);
+        })
+    };
+    busquedaEnDOM(lstFiltrada){
+        const contenedorProductos = document.getElementById(
+            "contenedorPagProductos"
+        );
+        contenedorProductos.innerHTML = " ";
+        let contenedor = document.createElement("div");
+        contenedor.className += "productosContenedor";
+        lstFiltrada.forEach((e) => {
+            let producto = document.createElement("div");
+            producto.className += "productosItem";
+            producto.innerHTML = `
+        <img src="${e.imagen}">
+        <h5 class="nombreProductosItem">${e.nombre}</h5>
+        <h6>$ ${e.precio}</h6>
+        `;
+            contenedor.append(producto);
+            let comprar = document.createElement("button");
+            comprar.innerText = "Comprar";
+            producto.append(comprar);
+
+            comprar.addEventListener("click", () => {
+                let flag = false;
+                this.carrito.forEach((p) =>{
+                    if(p.id == e.id){
+                        flag = true;
+                        p.cantidad = p.cantidad + 1;
+                        p.total = p.precio * p.cantidad;
+                    }
+                })
+                if(!flag){
+                    this.carrito.push({
+                        id : e.id,
+                        imagen: e.imagen,
+                        nombre: e.nombre,
+                        cantidad: e.cantidad,
+                        precio: e.precio,
+                        total : e.precio * e.cantidad
+                    });
+                }
+            localStorage.setItem("carrito", JSON.stringify(this.carrito));
+            });
+        });
+        contenedorProductos.append(contenedor);
     };
 };
 /*Iniciar Sistema*/
