@@ -3,12 +3,29 @@ class Sistema{
         this.lstProductos = [];
         this.carrito = [];
     }
+    cargarPagIndexEnDOM(){
+        const ntrosFavContent = document.getElementById("nuestrosFavoritosContent");
+        let contenedor = document.createElement("div");
+        contenedor.className += "nuestrosFavoritosItem";
+        this.lstProductos.forEach((e)=>{
+            if(e.id===2){
+                let imgFavs = document.createElement("img");
+                imgFavs.setAttribute("src","${e.imagen}");
+                imgFavs.append(contenedor);
+                let descripcionFavs = document.createElement("h3");
+                descripcionFavs.innerText="${e.nombre}";
+                descripcionFavs.append(contenedor);
+                contenedor.append(ntrosFavContent);
+
+            }
+        });
+    }
     async cargarProductosYMostrarEnDOM(){
         const resp = await fetch("/api/productos.json")
         this.lstProductos = await resp.json()
-        this.cargarEnDOM();
+        this.cargarPagProdEnDOM();
     };
-    cargarEnDOM(){
+    cargarPagProdEnDOM(){
         const contenedorProductos = document.getElementById(
             "contenedorPagProductos"
         );
@@ -94,13 +111,6 @@ class Sistema{
         carritoContenedor.append(carritoTotal);
         });
     };
-    cargarCheckoutDOM(){
-        const contCheckout = document.getElementById("checkoutCont");
-        const checkoutBtn = document.getElementById("checkoutBtn");
-            checkoutBtn.addEventListener('click', ()=>{
-                
-            });
-    };
 };
 /*Iniciar Sistema*/
 const sistema = new Sistema();
@@ -108,5 +118,3 @@ const sistema = new Sistema();
 sistema.cargarProductosYMostrarEnDOM();
 /*Carrito*/
 sistema.cargarCarrito();
-
-sistema.cargarCheckoutDOM();
