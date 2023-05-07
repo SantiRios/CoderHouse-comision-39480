@@ -1,0 +1,11 @@
+[
+{"id" : 1, "nombre": "Bolso 01S", "cantidad": 1, "precio": 2400, "imagen": "../img/14.jpg"},
+{"id" : 2, "nombre": "Bolso 02", "cantidad": 1, "precio": 2050, "imagen": "../img/12.jpg"},
+{"id" : 3, "nombre": "Bolso 022", "cantidad": 1, "precio": 1900, "imagen": "../img/13.jpg"},
+{"id" : 4, "nombre": "Mochila 1020", "cantidad": 1, "precio": 1750, "imagen": "../img/5.jpg"},
+{"id" : 5, "nombre": "Mochila 1012", "cantidad": 1, "precio": 2200, "imagen": "../img/6.jpg"},
+{"id": 6, "nombre": "Mochila 1016", "cantidad": 1, "precio": 2200, "imagen": "../img/4.jpg"},
+{"id": 7, "nombre": "Morral 407", "cantidad": 1, "precio": 1900, "imagen": "../img/8.jpg"},
+{"id": 8, "nombre": "Morral 408", "cantidad": 1, "precio": 2000, "imagen": "../img/9.jpg"},
+{"id": 9, "nombre": "Morral 409", "cantidad": 1, "precio": 2100, "imagen": "../img/10.jpg"}
+]
