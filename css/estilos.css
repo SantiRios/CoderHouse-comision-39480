@@ -325,7 +325,7 @@
     font-family: 'DM Serif Text', serif;
     padding-left: 10px;
   }
-  .carritoHeader h4{
+  .carritoHeader button{
     color: black;
     font-weight: bold;
     width: 40px;
@@ -378,7 +378,20 @@
     color: black;
     font-family: 'DM Serif Text', serif;
     display: flex;
-    justify-content: center;
+    justify-content: space-between
+  }
+  #checkoutBtn{
+    height: 40px;
+    width: 80px;
+    margin-right: 40px;
+    border-radius: 10%;
+    background-color: lightgreen;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  .carritoTotal h2{
+    margin-left: 40px;
   }
   #checkoutCont{
     background-color: black;
@@ -390,9 +403,28 @@
     display: flex;
     ;
   }
-  #busqueda{
-    
+  #checkoutCont{
+    display: grid;
+    position: absolute;
+    top: 80px;
+    color: black;
+    width: 80vw;
+    margin-left:10vw;
+    background-color: white;
   }
-  #busquedaLabel{
-
+  .checkoutHeader{
+    display: flex;
+    justify-content: space-between;
+  }
+  .checkoutHeader h2{
+    margin-left: 10px;
+  }
+  .checkoutHeader button{
+    height:40px;
+    width: 40px;
+  }
+  .deleteProd{
+    margin-left: 10px;
+    height: 30px;
+    width: 30px;
   }
